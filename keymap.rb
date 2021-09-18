@@ -20,41 +20,42 @@ kbd.init_pins(
 
 # default layer should be added at first
 kbd.add_layer :default, %i[
-  KC_TAB    KC_Q    KC_W      KC_E     KC_R     KC_T          KC_Y     KC_U     KC_I      KC_O      KC_P KC_BSPACE
-  CTL_ESC   KC_A    KC_S      KC_D     KC_F     KC_G          KC_H     KC_J     KC_K      KC_L KC_SCOLON  KC_QUOTE
-  KC_LSFT   KC_Z    KC_X      KC_C     KC_V     KC_B          KC_N     KC_M KC_COMMA    KC_DOT  KC_SLASH   KC_RSFT
-  XXXXXXX   XXXXXXX CMD_LANG2 LOWER_NO KC_SPACE KC_SPACE  KC_ENTER KC_ENTER RAISE_NO ALT_LANG1   XXXXXXX   XXXXXXX
-].map { |kc| kc == :XXXXXXX ? :KC_NO : kc }
-kbd.add_layer :raise, %i[
-  KC_TAB  KC_EXLM KC_AT     KC_HASH     KC_DLR   KC_PERC     KC_CIRC  KC_AMPR    KC_ASTER     KC_LPRN KC_RPRN KC_BSPACE
-  CTL_ESC KC_LABK KC_LCBR   KC_LBRACKET KC_LPRN  KC_QUOTE   KC_MINUS KC_EQUAL     KC_LCBR     KC_RCBR KC_PIPE    KC_GRAVE
-  KC_LSFT KC_RABK KC_RCBR   KC_RBRACKET KC_RPRN  KC_DQUO     KC_UNDS  KC_PLUS KC_LBRACKET KC_RBRACKET KC_BSLS   KC_TILD
-  XXXXXXX XXXXXXX CMD_LANG2 LOWER_NO    KC_SPACE KC_SPACE   KC_ENTER KC_ENTER    RAISE_NO   ALT_LANG1 XXXXXXX   XXXXXXX
-].map { |kc| kc == :XXXXXXX ? :KC_NO : kc }
-kbd.add_layer :lower, %i[
-  KC_TAB  KC_1    KC_2      KC_3        KC_4      KC_5           KC_6     KC_7     KC_8      KC_9     KC_0 KC_BSPACE
-  CTL_ESC KC_F2   KC_F10    KC_F12      KC_LPRN   KC_QUOTE    KC_LEFT  KC_DOWN    KC_UP  KC_RIGHT KC_RIGHT   XXXXXXX
-  KC_LSFT KC_RABK KC_RCBR   KC_RBRACKET KC_RPRN   KC_DQUO        KC_0     KC_1     KC_2      KC_3 KC_SLASH  KC_COMMA
-  XXXXXXX XXXXXXX CMD_LANG2 LOWER_NO    KC_SPACE  KC_SPACE   KC_ENTER KC_ENTER RAISE_NO ALT_LANG1  XXXXXXX   XXXXXXX
-].map { |kc| kc == :XXXXXXX ? :KC_NO : kc }
-#
+  KC_TAB   KC_Q    KC_W       KC_E    KC_R       KC_T            KC_Y        KC_U         KC_I    KC_O         KC_P      KC_EQL
+  KC_LSFT  KC_A    KC_S       KC_D    KC_F       KC_G            KC_H        KC_J         KC_K    KC_L         KC_SCOLON KC_QUOT
+  KC_LCTL  KC_Z    KC_X       KC_C    KC_V       KC_B            KC_N        KC_M         KC_COMM KC_DOT       KC_SLSH   KC_MINS
+  KC_NO    KC_NO   ALT_F5     KC_BSPC SFT_SPC    CALC_ESC        CUSL_TAB    CTRL_ENT     KC_DEL  GUI_F12      KC_NO     KC_NO
+]
+kbd.add_layer :cursol, %i[
+  KC_NO    KC_F1   KC_F2      KC_PGUP KC_F4      KC_F5           KC_F6       KC_F7        KC_UP   KC_F9        KC_F10  RESET
+  KC_NO    KC_TILD KC_HOME    KC_PGDN KC_END     KC_LPRN         KC_RPRN     KC_LEFT      KC_DOWN KC_RGHT      KC_PIPE KC_F11
+  KC_NO    KC_GRV  C(KC_LEFT) KC_F3   C(KC_RGHT) S(ALTAB)        ALTAB       LCA(KC_LEFT) KC_F8   LCA(KC_RGHT) KC_BSLS RGBRST
+  KC_NO    KC_NO   KC_NO      KC_NO   C(KC_SPC)  MO(_ADJUST)     KC_NO       KC_NO        KC_NO   KC_NO        KC_NO   KC_NO
+]
+kbd.add_layer :calc, %i[
+  RESET    KC_1    KC_2       KC_3    KC_4       KC_5            KC_6        KC_7         KC_8    KC_9         KC_0    KC_NO
+  KC_NO    KC_AT   KC_HASH    KC_DLR  KC_PERC    KC_LBRC         KC_RBRC     KC_4         KC_5    KC_6         KC_PPLS KC_NO
+  KC_NO    KC_CIRC KC_AMPR    KC_ASTR KC_EXLM    KC_LCBR         KC_RCBR     KC_1         KC_2    KC_3         KC_PEQL KC_NO
+  KC_NO    KC_NO   KC_NO      KC_NO   KC_NO      KC_NO           MO(_ADJUST) KC_0         KC_0    KC_PDOT      KC_NO   KC_NO
+]
+
 #                   Your custom     Keycode or             Keycode (only modifiers)      Release time      Re-push time
 #                   key name        Array of Keycode       or Layer Symbol to be held    threshold(ms)     threshold(ms)
 #                                   or Proc                or Proc which will run        to consider as    to consider as
 #                                   when you click         while you keep press          `click the key`   `hold the key`
-kbd.define_mode_key :CTL_ESC,     [ :KC_ESCAPE,            :KC_LCTL,                     120,              150 ]
-kbd.define_mode_key :RAISE_NO,    [ :KC_NO,                :raise,                       120,              150 ]
-kbd.define_mode_key :LOWER_NO,    [ :KC_NO,                :lower,                       120,              400 ]
-kbd.define_mode_key :ALT_LANG1,   [ :KC_LANG1,             :KC_LALT,                     120,              400 ]
-kbd.define_mode_key :CMD_LANG2,   [ :KC_LANG2,             :KC_RGUI,                     120,              400 ]
+kbd.define_mode_key :ALT_F5,      [ :KC_F5,                :KC_LALT,                     150,              200 ]
+kbd.define_mode_key :SFT_SPC,     [ :KC_SPACE,             :KC_RSFT,                     150,              200 ]
+kbd.define_mode_key :CALC_ESC,    [ :KC_ESC,               :calc,                        150,              200 ]
+kbd.define_mode_key :CUSL_TAB,    [ :KC_TAB,               :cursol,                      150,              200 ]
+kbd.define_mode_key :CTRL_ENT,    [ :KC_ENTER,             :KC_LCTL,                     150,              200 ]
+kbd.define_mode_key :GUI_F12,     [ :KC_F12,               :KC_RGUI,                     150,              200 ]
 
 # `before_report` will work just right before reporting what keys are pushed to USB host.
 # You can use it to hack data by adding an instance method to Keyboard class by yourself.
 # ex) Use Keyboard#before_report filter if you want to input `":" w/o shift` and `";" w/ shift`
-#kbd.before_report do
-#  kbd.invert_sft if kbd.keys_include?(:KC_SCOLON)
-#  # You'll be also able to write `invert_ctl`, `invert_alt` and `invert_gui`
-#end
+kbd.before_report do
+ kbd.invert_sft if kbd.keys_include?(:KC_SCOLON)
+ # You'll be also able to write `invert_ctl` `invert_alt` and `invert_gui`
+end
 
 # Initialize RGBLED with pin, underglow_size, backlight_size and is_rgbw.
 rgb = RGB.new(
