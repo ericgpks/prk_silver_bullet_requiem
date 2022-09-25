@@ -55,7 +55,7 @@ end
 rgb = RGB.new(
   0,    # pin number
   0,    # size of underglow pixel
-  22,   # size of backlight pixel
+  26,   # size of backlight pixel
   false # 32bit data will be sent to a pixel if true while 24bit if false
 )
 # Set an effect
@@ -68,7 +68,8 @@ RGB_ROW_COUNT = 4
   [169, 10], [135,  6], [101,  2], [67,   6], [ 33, 12], [  0, 20],
   [  0, 34], [ 33, 27], [ 67, 20], [101, 17], [135, 20], [169, 24],
   [169, 38], [135, 34], [101, 31], [67,  34], [ 33, 41], [  0, 48],
-                        [135, 55], [159, 61], [194, 57], [223, 64]
+  [135, 55], [159, 61], [194, 57], [223, 64],
+  [223, 38], [194, 31], [194,  2], [223,  2]
 ].each do |p|
   rgb.add_pixel(p[0],p[1])
 end
